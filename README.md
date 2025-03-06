@@ -1,3 +1,5 @@
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)]((https://github.com/ThGoulis/SQLite-Data-Explorer-Visualization-Tool))
+
 # SQLite-Data-Explorer-Visualization-Tool
 A GUI-based tool for exploring SQLite databases, executing SQL queries, and visualizing query results with interactive charts. This application provides an intuitive user interface built with **Tkinter** and **ttkbootstrap** for a seamless database interaction experience.
 
