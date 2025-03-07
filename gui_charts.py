@@ -9,7 +9,7 @@ import seaborn as sns
 
 fig = None  # Global figure for the chart
 
-def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var, marker_size_var, plot_frame, title_var):
+def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var, plot_frame, title_var):
     """Dynamically updates the chart when user modifies selections."""
     global fig
     df_result = get_query_results()
@@ -23,7 +23,6 @@ def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var,
     chart_type = chart_type_var.get()
     enable_grid = grid_var.get()
     show_labels = labels_var.get()
-    marker_size = marker_size_var.get()
     custom_title = title_var.get().strip()
 
     if not x_col or not y_col:
