@@ -97,12 +97,7 @@ def create_main_window():
     labels_check = ttk.Checkbutton(chart_controls_frame, text="Show Labels", variable=labels_var)
     labels_check.grid(row=1, column=3, padx=5, pady=5)
 
-    # Marker Size Slider
-    ttk.Label(chart_controls_frame, text="Marker Size:").grid(row=2, column=1, padx=5, pady=5)
-    marker_size_var = tk.IntVar(value=5)
-    marker_size_slider = ttk.Scale(chart_controls_frame, from_=1, to=20, variable=marker_size_var, orient="horizontal")
-    marker_size_slider.grid(row=2, column=2, padx=5, pady=5)
-
+    # User Input Title
     ttk.Label(tab_chart, text="Chart Title:").pack()
     title_var = tk.StringVar(value="Title")  # Default Title
     title_entry = ttk.Entry(tab_chart, textvariable=title_var, width=40)
@@ -110,7 +105,7 @@ def create_main_window():
 
     # Generate Chart Button
     generate_button = ttk.Button(tab_chart, text="Generate Chart",
-                            command=lambda: generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var, marker_size_var, plot_frame, title_var))
+                            command=lambda: generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var, plot_frame, title_var))
     generate_button.pack(pady=5, fill="x")
 
     # Save Chart Button
