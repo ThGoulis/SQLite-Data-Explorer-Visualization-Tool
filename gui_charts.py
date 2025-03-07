@@ -114,7 +114,7 @@ def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var,
         # Group by X and Y, then sum numerical values
         df_heatmap = df_result.groupby([x_col, y_col], as_index=False)[values_col].sum()
 
-        # ✅ Pivot for Heatmap Format (Rows = X, Columns = Y)
+        # Pivot for Heatmap Format (Rows = X, Columns = Y)
         df_pivot = df_heatmap.pivot(index=x_col, columns=y_col, values=values_col)
 
         # DataFrame is not empty
