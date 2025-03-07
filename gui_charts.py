@@ -47,35 +47,35 @@ def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var,
     colors = plt.cm.get_cmap("viridis", num_colors)(range(num_colors))
 
     if chart_type == "Bar":
-        # ✅ Ensure all unique categories are preserved
+        # All unique categories are preserved
         categorical_cols = df_result.select_dtypes(include=['object']).columns.tolist()
 
-        # ✅ Ensure the X-axis column is not mistakenly removed from grouping
+        # The X-axis column is not mistakenly removed from grouping
         group_by_cols = [x_col] + [col for col in categorical_cols if col != x_col] 
 
-        # ✅ Group dynamically if multiple categorical columns exist
+        # Group dynamically if multiple categorical columns exist
         if len(group_by_cols) > 1:
             df_bar = df_result.groupby(group_by_cols, as_index=False)[y_col].sum()
         else:
             df_bar = df_result.copy()
         
-        # ✅ Convert X-axis to string to ensure categorical plotting
+        # Convert X-axis to string to ensure categorical plotting
         df_bar["x_labels"] = df_bar[group_by_cols].astype(str).agg(' '.join, axis=1)
 
         fig, ax = plt.subplots(figsize=(9, 5))
 
         bars = ax.bar(
-            df_bar["x_labels"],  # ✅ Use formatted labels instead of raw X values
+            df_bar["x_labels"], 
             df_bar[y_col], 
             color=plt.cm.viridis(np.linspace(0, 1, len(df_bar))),
             alpha=0.7
         )
 
-        # ✅ Rotate X-labels for better readability
+        # Rotate X-labels for better readability
         ax.set_xticks(range(len(df_bar)))
         ax.set_xticklabels(df_bar["x_labels"], rotation=45, ha="right", fontsize=9)
 
-        # ✅ Add labels if enabled
+        # Add labels if enabled
         if show_labels:
             ax.bar_label(bars, fmt="%.2f", fontsize=8, padding=3)
 
@@ -98,52 +98,52 @@ def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var,
     canvas.draw()
 
     if chart_type == "Heatmap":
-        # ✅ Extract categorical columns from the DataFrame
+        # Extract categorical columns from the DataFrame
         categorical_cols = df_result.select_dtypes(include=['object']).columns.tolist()
 
-        # ✅ Ensure X-axis and Y-axis columns exist
+        # Ensure X-axis and Y-axis columns exist
         group_by_cols = [x_col] + [col for col in categorical_cols if col != x_col]
 
-        # ✅ Check if we have enough categorical data
+        # Check if we have enough categorical data
         if len(group_by_cols) < 2:
             messagebox.showerror("Error", "⚠️ Need at least two categorical columns for a Heatmap!")
             return
 
-        y_col = group_by_cols[1]  # ✅ Ensure Y-axis is categorical
-        values_col = y_axis_var.get()  # ✅ Ensure selected numerical column
+        y_col = group_by_cols[1]  # Y-axis is categorical
+        values_col = y_axis_var.get()  # Selected numerical column
 
-        # ✅ Group by X and Y, then sum numerical values
+        # Group by X and Y, then sum numerical values
         df_heatmap = df_result.groupby([x_col, y_col], as_index=False)[values_col].sum()
 
         # ✅ Pivot for Heatmap Format (Rows = X, Columns = Y)
         df_pivot = df_heatmap.pivot(index=x_col, columns=y_col, values=values_col)
 
-        # ✅ Ensure DataFrame is not empty
+        # DataFrame is not empty
         if df_pivot.empty:
             messagebox.showerror("Error", "⚠️ No valid data for Heatmap!")
             return
 
-        # ✅ Convert pivot table to NumPy array for Matplotlib
+        # Convert pivot table to NumPy array for Matplotlib
         heatmap_data = df_pivot.to_numpy()
 
-        # ✅ Create Figure & Axes
+        # Create Figure & Axes
         fig, ax = plt.subplots(figsize=(9, 5))
 
-        # ✅ Generate Heatmap using Matplotlib's imshow()
+        # Generate Heatmap using Matplotlib's imshow()
         heatmap = ax.imshow(heatmap_data, cmap="viridis", aspect="auto")
 
-        # ✅ Add Color Bar
+        # Add Color Bar
         cbar = plt.colorbar(heatmap)
         cbar.set_label(values_col, fontsize=10)
 
-        # ✅ Set Tick Labels (Ensure readable format)
+        # Set Tick Labels (Ensure readable format)
         ax.set_xticks(range(len(df_pivot.columns)))
         ax.set_xticklabels(df_pivot.columns, rotation=45, ha="right", fontsize=9)
 
         ax.set_yticks(range(len(df_pivot.index)))
         ax.set_yticklabels(df_pivot.index, fontsize=9)
 
-        # ✅ Add Data Labels (Annotations)
+        # Add Data Labels (Annotations)
         for i in range(len(df_pivot.index)):
             for j in range(len(df_pivot.columns)):
                 ax.text(j, i, f"{heatmap_data[i, j]:.1f}", ha="center", va="center", color="white", fontsize=8)

@@ -1,11 +1,11 @@
 from tkinter import filedialog, messagebox, Toplevel, Listbox, Scrollbar
-import db_connection  # ✅ Import the new connection manager
+import db_connection  # Import the connection manager
 
 def load_database(tables_listbox):
     """Loads an SQLite database and shows its tables."""
     db_path = filedialog.askopenfilename(filetypes=[("SQLite Database", "*.sqlite"), ("All Files", "*.*")])
     if db_path:
-        db_connection.set_connection(db_path)  # ✅ Set connection
+        db_connection.set_connection(db_path)
         messagebox.showinfo("Success", "✅ Database Loaded Successfully!")
         show_tables(tables_listbox)
 
@@ -41,7 +41,7 @@ def table_double_click(event, tables_listbox):
         cursor.execute(f"PRAGMA table_info({table_name})")
         columns = [row[1] for row in cursor.fetchall()]  # Column names are in the second field
 
-        # ✅ Show Popup Window
+        # Show Popup Window
         popup = Toplevel()
         popup.title(f"Columns in {table_name}")
         popup.geometry("300x300")

@@ -1,6 +1,6 @@
 import os
 import sqlite3
-import ttkbootstrap as ttk  # Modern UI
+import ttkbootstrap as ttk  
 from ttkbootstrap import Style
 from tkinter import filedialog, messagebox, Toplevel
 import pandas as pd
@@ -9,7 +9,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 def main():
     # Create Main Window
-    root = ttk.Window(themename="darkly")  # Modern Theme
+    root = ttk.Window(themename="darkly")  
     style = Style(theme="darkly")
     root.title("SQLite Data Explorer")
     root.geometry("1300x800")
@@ -90,7 +90,7 @@ def main():
         fig, ax = plt.subplots(figsize=(8, 5))
 
         if chart_type == "Bar":
-            colors = plt.cm.viridis(range(len(df_result)))  # Different colors for each bar
+            colors = plt.cm.viridis(range(len(df_result)))  
             ax.bar(df_result[x_col], df_result[y_col], color=colors, alpha=0.7)
         elif chart_type == "Line":
             ax.plot(df_result[x_col], df_result[y_col], marker="o", linestyle="-", color="blue")
@@ -109,7 +109,7 @@ def main():
         canvas.get_tk_widget().pack()
         canvas.draw()
 
-    # ✅ Function to Export Chart as PNG
+    # Function to Export Chart as PNG
     def export_as_png():
         global fig
         if fig is None:
@@ -121,7 +121,7 @@ def main():
             fig.savefig(file_path, dpi=300)
             messagebox.showinfo("Success", "Chart saved as PNG!")
 
-    # ✅ Function to Export Chart as PDF
+    # Function to Export Chart as PDF
     def export_as_pdf():
         global fig
         if fig is None:
@@ -133,7 +133,7 @@ def main():
             fig.savefig(file_path, format="pdf", dpi=300)
             messagebox.showinfo("Success", "Chart saved as PDF!")
 
-    # ✅ Function to Export Query Results as CSV
+    # Function to Export Query Results as CSV
     def export_as_csv():
         global df_result
         if df_result is None or df_result.empty:
@@ -145,7 +145,7 @@ def main():
             df_result.to_csv(file_path, index=False)
             messagebox.showinfo("Success", "Data exported as CSV!")
 
-    # ✅ Function to Exit the Application
+    # Function to Exit the Application
     def exit_application():
         root.quit()
         root.destroy()
@@ -187,7 +187,7 @@ def main():
     plot_button = ttk.Button(left_frame, text="Generate Chart", bootstyle="info", command=generate_chart)
     plot_button.pack(pady=10, fill="x")
 
-    # ✅ Export Buttons
+    # Export Buttons
     export_csv_button = ttk.Button(left_frame, text="Export as CSV", bootstyle="secondary", command=export_as_csv)
     export_csv_button.pack(pady=5, fill="x")
 
@@ -197,7 +197,7 @@ def main():
     export_pdf_button = ttk.Button(left_frame, text="Export as PDF", bootstyle="secondary", command=export_as_pdf)
     export_pdf_button.pack(pady=5, fill="x")
 
-    # ✅ Exit Button
+    # Exit Button
     exit_button = ttk.Button(left_frame, text="Exit", bootstyle="danger", command=exit_application)
     exit_button.pack(pady=10, fill="x")
 
