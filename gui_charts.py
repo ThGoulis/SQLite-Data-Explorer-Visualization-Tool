@@ -78,7 +78,11 @@ def generate_chart(x_axis_var, y_axis_var, chart_type_var, grid_var, labels_var,
         if show_labels:
             ax.bar_label(bars, fmt="%.2f", fontsize=8, padding=3)
 
+        # Add grid if enabled
+        if enable_grid:
+            ax.grid(True, linestyle="--", alpha=0.5)
 
+        # Default title
         if not custom_title:
             custom_title = f"{x_col} and {y_col}"  # Default Title if None
 
