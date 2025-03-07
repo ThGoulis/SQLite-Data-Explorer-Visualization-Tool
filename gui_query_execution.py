@@ -8,7 +8,7 @@ def execute_query(query_entry, result_frame, x_axis_dropdown, y_axis_dropdown):
     """Executes the SQL query and displays the results in a table."""
     global _df_result
 
-    conn = db_connection.get_connection()  # ✅ Use db_connection instead
+    conn = db_connection.get_connection()  # Use db_connection instead
     if not conn:
         messagebox.showerror("Error", "⚠️ Load a database first!")
         return
@@ -21,7 +21,7 @@ def execute_query(query_entry, result_frame, x_axis_dropdown, y_axis_dropdown):
     try:
         _df_result = pd.read_sql_query(query, conn)
         display_results_table(_df_result, result_frame)
-        update_column_selection(x_axis_dropdown, y_axis_dropdown)  # ✅ Update dropdowns
+        update_column_selection(x_axis_dropdown, y_axis_dropdown)  # Update dropdowns
         messagebox.showinfo("Success", "✅ Query Executed Successfully!")
         
     except Exception as e:
@@ -65,7 +65,7 @@ def display_results_table(df, result_frame):
     # Set column headings and adjust column width dynamically
     for col in df.columns:
         tree.heading(col, text=col)
-        tree.column(col, width=150, anchor="w")  # Adjust column width
+        tree.column(col, width=150, anchor="w")
 
     # Insert rows
     for _, row in df.iterrows():
@@ -82,11 +82,11 @@ def update_column_selection(x_axis_dropdown, y_axis_dropdown):
 
     columns = _df_result.columns.tolist()
     
-    # ✅ Update dropdown values
+    # Update dropdown values
     x_axis_dropdown["values"] = columns
     y_axis_dropdown["values"] = columns
 
-    # ✅ Set defaults
+    # Set defaults
     if columns:
         x_axis_dropdown.current(0)
         if len(columns) > 1:
