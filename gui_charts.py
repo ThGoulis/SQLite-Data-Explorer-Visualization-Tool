@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from gui_query_execution import get_query_results
 import numpy as np
-import seaborn as sns
 
 fig = None  # Global figure for the chart
 
