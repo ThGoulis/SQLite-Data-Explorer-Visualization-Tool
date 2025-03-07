@@ -1,1 +1,1 @@
-tkinter matplotlib pandas numpy seaborn ttkbootstrap sqlite3
+tkinter matplotlib pandas numpy ttkbootstrap sqlite3
