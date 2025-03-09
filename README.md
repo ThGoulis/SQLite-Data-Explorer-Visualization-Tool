@@ -58,7 +58,7 @@ Ensure you have Python 3.7+ installed. Install the required dependencies using:
 
 2. Execute Queries: Enter an SQL query and click Execute Query to view results.
 
-3. Visualize Data: Choose X/Y axes and generate various chart types.
+3. Visualize Data: Choose X/Y axes and generate chart types.
 
 4. Export Data: Save query results or charts in multiple formats.
 
